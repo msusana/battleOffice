@@ -1,0 +1,48 @@
+
+   {% for product in products %}
+
+                        <label class="cure-radio">
+                            <input name="product" value="{{product.id}}" type="radio" required>
+                            <article>
+                                <div class="card center-align">
+                                    <div class="row">
+                                        <div class="col s12 m12 l4">
+                                            <div class="image-content">
+                                                <img src="{{product.image}}" alt="{{product.name}}{{product.description}}" class="responsive-img">
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6 l4">
+                                            <div class="card-content">
+                                                <p class="h6">
+                                                    {{product.name}}
+                                                </p>
+                                                <p class="h5 color_brand_secondary">
+                                                   {{product.description}}
+                                                </p>
+                                                <p class="h4">
+                                                {% set pricePromo = product.price * 130 / 100 %}
+                                                    {{product.price}}
+                                                    <span class="h6"><br>au lieu de <del class="h5 color_brand_secondary">{{pricePromo}}</del></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6 l4">
+                                            <div class="card-content">
+                                                <p class="h6 color_brand_secondary">
+                                                 {% set priceEco = pricePromo - product.price %}
+                                                    J'économise {{priceEco}}€
+                                                </p>
+                                                <p class="h6">
+                                                    + livraison gratuite
+                                                </p>
+                                                <div class="picto-wrapper">
+                                                    <img src="assets/images/like-product.png" class="responsive-img" alt="Garantie satisfait ou remboursé">
+                                                    <p class="color_brand_primary">Satisfait<br>ou remboursé</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </label>
+                        {% endfor %} 

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style type="text/css">
+    #card-stripe{
+        margin-top:10%;
+        margin-bottom:10%
+    }
+</style>
+<div class="container">
+    <form action="{{path ('payment') }}" method="post">
+        <input type="hidden" name="method" value='stripe'>   
+        <input type="hidden" name="orderId" value='{{order.id}}'>
+            <div id="card-stripe"></div>
+                <button class='btn-large waves-effect waves-light' type="submit"> Continuer </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="https://js.stripe.com/v3/"></script>
+             <script>
+            var stripe = Stripe("pk_test_51ItYGCKhlLJk2wgHIQIOlCcsJMj7psL8Y2e0FXkVvQj3zyEVyG2yLztCuVSmeZoI7QmCIk6PNVootoRsylLQbLC2008tQqjrl5");
+         // The items the customer wants to buy
+           var elements = stripe.elements();
+
+        var style = {
+            base: {
+                color: "#32325d",
+                fontFamily: 'Arial, sans-serif',
+                fontSmoothing: "antialiased",
+                fontSize: "16px",
+                "::placeholder": {
+                    color: "#32325d"
+                }
+            },
+            invalid: {
+                fontFamily: 'Arial, sans-serif',
+                color: "#fa755a",
+                iconColor: "#fa755a"
+            }
+        };
+       
+
+        var card = elements.create("card", { style: style });
+        // Stripe injects an iframe into the DOM
+        card.mount("#card-stripe");
+    </script>
+
+{% endblock %}
